@@ -25,8 +25,11 @@ public class Part2
             var from = Convert.ToInt16(instruction[fromIndex]) - 1;
             var to = Convert.ToInt16(instruction[toIndex]) - 1;
 
-            var moving = stacks[from].Skip(stacks[from].Count - count);
-            stacks[from] = stacks[from].Take(stacks[from].Count - count).ToList();
+            // Determine how many items will remain in the list. Take all the other items
+            // and put them in a moving pile. Update the pile to exclude those moving items.
+            int remainingItemsCount = stacks[from].Count - count;
+            var moving = stacks[from].Skip(remainingItemsCount);
+            stacks[from] = stacks[from].Take(remainingItemsCount).ToList();
             stacks[to].AddRange(moving);
         }
 

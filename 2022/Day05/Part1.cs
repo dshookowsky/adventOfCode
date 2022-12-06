@@ -8,23 +8,12 @@ public class Part1
     {
         var (crateStacks, instructions) = InputParser.ParseInput(lines);
 
+        // Turn the collection of IEnumerables into a collection of stacks.
         List<Stack<char>> stacks = new();
         foreach (IEnumerable<char> crateStack in crateStacks)
         {
             stacks.Add(new Stack<char>(crateStack));
         }
-
-        //var stacks = new[] {
-        //    new Stack<char>(new char[] { 'D', 'B', 'J', 'V' }),
-        //    new Stack<char>(new char[] { 'P', 'V', 'B', 'W', 'R', 'D', 'F' }),
-        //    new Stack<char>(new char[] { 'R', 'G', 'F', 'L', 'D', 'C', 'W', 'Q'}),
-        //    new Stack<char>(new char[] { 'W', 'J', 'P', 'M', 'L', 'N', 'D', 'B' }),
-        //    new Stack<char>(new char[] { 'H', 'N', 'B', 'P', 'C', 'S', 'Q' }),
-        //    new Stack<char>(new char[] { 'R', 'D', 'B', 'S', 'N', 'G'}),
-        //    new Stack<char>(new char[] { 'Z', 'B', 'P', 'M', 'Q', 'F', 'S', 'B'}),
-        //    new Stack<char>(new char[] { 'W', 'L', 'F'}),
-        //    new Stack<char>(new char[] { 'S', 'V', 'F', 'M', 'R'})
-        //};
 
         const int countIndex = 1;
         const int fromIndex = 3;
