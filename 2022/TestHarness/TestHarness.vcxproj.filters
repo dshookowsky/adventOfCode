@@ -24,21 +24,12 @@
     <ClCompile Include="SolutionResponse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Day02.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day01.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SolutionResponse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IAdventSolution.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Day02.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

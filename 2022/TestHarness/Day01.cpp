@@ -1,4 +1,3 @@
-#include "IAdventSolution.h"
 #include "Day01.h"
 #include "SolutionResponse.h"
 #include <algorithm>

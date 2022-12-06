@@ -129,14 +129,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Day01.cpp" />
-    <ClCompile Include="Day02.cpp" />
     <ClCompile Include="SolutionResponse.cpp" />
     <ClCompile Include="TestHarness.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Day01.h" />
-    <ClInclude Include="Day02.h" />
-    <ClInclude Include="IAdventSolution.h" />
     <ClInclude Include="SolutionResponse.h" />
   </ItemGroup>
   <ItemGroup>
