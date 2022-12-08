@@ -6,7 +6,7 @@ public class Part1
     {
         var fileSystem = new FileSystem(lines);
 
-        var directoriesUnder100K = fileSystem.Paths.Values
+        var directoriesUnder100K = fileSystem.Children
             .Select(v => new { v.Path, v.Size })
             .Where(d => d.Size < 100000)
             .ToList();

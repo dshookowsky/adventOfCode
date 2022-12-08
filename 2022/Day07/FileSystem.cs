@@ -4,21 +4,19 @@ namespace Day07;
 
 public class FileSystem
 {
-    public Dictionary<string, DirectoryInformation> Paths => m_paths;
-    public DirectoryInformation Root;
-    private readonly Dictionary<string, DirectoryInformation> m_paths;
+    public DirectoryInformation Root => m_root;
+    private readonly DirectoryInformation m_root;
 
     public FileSystem(IEnumerable<string> lines)
     {
-        Root = new("/");
+        m_root = new("/");
 
-        m_paths = new() { { Root.Path, Root } };
         DirectoryInformation? currentDirectory = Root;
 
         Regex filePattern = new(@"^(\d+) (\S+)$");
         foreach (var line in lines)
         {
-            // Because the input contains the result, we can ignore "$ ls "
+            // Because the input contains the result, we can ignore "$ ls"
             if (line.StartsWith("$ cd"))
             {
                 if (line.EndsWith(".."))
@@ -44,9 +42,19 @@ public class FileSystem
             else if (line.StartsWith("dir"))
             {
                 var name = line.Split(' ')[1];
-                var subDirectory = currentDirectory.CreateSubDirectory(name);
-                m_paths[subDirectory.Path] = subDirectory;
+                currentDirectory.CreateSubDirectory(name);
             }
         }
     } 
+
+    public IEnumerable<DirectoryInformation> Children
+    {
+        get {
+            yield return m_root;
+            foreach (var child in m_root.Children)
+            {
+                yield return child;
+            }
+        }
+    }
 }

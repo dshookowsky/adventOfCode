@@ -7,7 +7,8 @@ public class DirectoryInformation
     private readonly string m_name;
     public string Name => m_name;
     public List<FileInformation> Files = new();
-    public Dictionary<string, DirectoryInformation> Children = new();
+
+    private Dictionary<string, DirectoryInformation> m_children = new();
 
     private readonly DirectoryInformation? m_parent;
     public DirectoryInformation? Parent => m_parent;
@@ -25,6 +26,7 @@ public class DirectoryInformation
             }
         }
     }
+
     public DirectoryInformation(string name)
     {
         m_name = name;
@@ -43,14 +45,38 @@ public class DirectoryInformation
         if (targetPath == Path) return this;
 
         string path = line.Split(' ')[2];
-        return Children[path];
+        return m_children[path];
     }
 
+    public IEnumerable<DirectoryInformation> Children
+    {
+        get
+        {
+            foreach (var child in m_children.Values)
+            {
+                yield return child;
+                foreach (var subdirectory in child.Children)
+                {
+                    yield return subdirectory;
+                }
+            }
+        }
+    }
     public DirectoryInformation CreateSubDirectory(string directoryName)
     {
-        Children[directoryName] = new DirectoryInformation(this, directoryName);
-        return Children[directoryName];
+        m_children[directoryName] = new DirectoryInformation(this, directoryName);
+        return m_children[directoryName];
     }
 
-    public int Size => Files.Sum(f => f.Size) + Children.Sum(d => d.Value.Size);
+    public int Size {
+        get
+        {
+            var size = Files.Sum(f => f.Size);
+            foreach (var child in m_children.Values)
+            {
+                size += child.Size;
+            }
+            return size;
+        }
+    }
 }

@@ -10,7 +10,7 @@ public partial class Part2
         int usedSpace = fileSystem.Root.Size;
         int availableDriveSpace = totalDriveSize - usedSpace;
 
-        var candidates = fileSystem.Paths.Values
+        var candidates = fileSystem.Children
             .Select(v => new { v.Path, v.Size })
             .Where(d => availableDriveSpace + d.Size >= 30000000).ToList();
 
