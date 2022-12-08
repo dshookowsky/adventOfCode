@@ -6,11 +6,8 @@ public class Part1
     {
         var fileSystem = new FileSystem(lines);
 
-        var directoriesUnder100K = fileSystem.Children
-            .Select(v => new { v.Path, v.Size })
+        return fileSystem.Children
             .Where(d => d.Size < 100000)
-            .ToList();
-
-        return directoriesUnder100K.Sum(d => d.Size); ;
+            .Sum(d => d.Size);
     }
 }
