@@ -6,12 +6,14 @@ public partial class Part2
     {
         var fileSystem = new FileSystem(lines);
 
-        int totalDriveSize = 70000000;
+        const int totalDriveSize = 70000000;
+        const int requiredSpace = 30000000;
+
         int usedSpace = fileSystem.Root.Size;
         int availableDriveSpace = totalDriveSize - usedSpace;
 
         return fileSystem.Children
-            .Where(d => availableDriveSpace + d.Size >= 30000000).ToList()
+            .Where(d => availableDriveSpace + d.Size >= requiredSpace).ToList()
             .OrderBy(x => x.Size)
             .First()
             .Size;
