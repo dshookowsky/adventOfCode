@@ -41,11 +41,10 @@ public class DirectoryInformation
 
     public DirectoryInformation ParseCd(string line)
     {
-        string targetPath = line.Split(' ')[2];
-        if (targetPath == Path) return this;
+        string directoryName = line.Split(' ')[2];
+        if (directoryName == Path) return this;
 
-        string path = line.Split(' ')[2];
-        return m_children[path];
+        return m_children[directoryName];
     }
 
     public IEnumerable<DirectoryInformation> Children

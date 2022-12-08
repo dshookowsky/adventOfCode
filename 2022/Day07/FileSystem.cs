@@ -11,7 +11,7 @@ public class FileSystem
     {
         m_root = new("/");
 
-        DirectoryInformation? currentDirectory = Root;
+        DirectoryInformation currentDirectory = Root;
 
         Regex filePattern = new(@"^(\d+) (\S+)$");
         foreach (var line in lines)
