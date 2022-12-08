@@ -6,17 +6,12 @@ public partial class Part2
     {
         var fileSystem = new FileSystem(lines);
 
-        int DirectorySize(DirectoryInformation d)
-        {
-            return d.Files.Sum(f => f.Size) + d.Children.Sum(c => DirectorySize(c.Value));
-        }
-
         int totalDriveSize = 70000000;
-        int usedSpace = DirectorySize(fileSystem.Root);
+        int usedSpace = fileSystem.Root.Size;
         int availableDriveSpace = totalDriveSize - usedSpace;
 
         var candidates = fileSystem.Paths.Values
-            .Select(v => new { Path = v.Path, Size = DirectorySize(v) })
+            .Select(v => new { v.Path, v.Size })
             .Where(d => availableDriveSpace + d.Size >= 30000000).ToList();
 
         var directoryToDelete = candidates

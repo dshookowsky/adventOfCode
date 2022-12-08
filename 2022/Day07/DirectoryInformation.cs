@@ -51,4 +51,6 @@ public class DirectoryInformation
         Children[directoryName] = new DirectoryInformation(this, directoryName);
         return Children[directoryName];
     }
+
+    public int Size => Files.Sum(f => f.Size) + Children.Sum(d => d.Value.Size);
 }
