@@ -4,7 +4,7 @@ namespace Day09;
 
 public class Part2
 {
-    public class State
+    private class State
     {
         public Point Point = new(0,0);
         public Dictionary<Point, int> PointHistory = new ()
@@ -36,11 +36,11 @@ public class Part2
 
         if (head.X != tail.X && head.Y == tailY) // same row
         {
-            while (Math.Abs(tailX - head.X) > 1) tailX += directionX;
+            if (Math.Abs(tailX - head.X) > 1) tailX += directionX;
         }
         else if (head.Y != tail.Y && head.X == tailX) // same column
         {
-            while (Math.Abs(tailY - head.Y) > 1) tailY += directionY;
+            if (Math.Abs(tailY - head.Y) > 1) tailY += directionY;
         }
         else // different rows and columns 
         {
