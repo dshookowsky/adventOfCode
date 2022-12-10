@@ -30,7 +30,7 @@ public class Part1
                     instructionCycles = 1;
                     break;
                 default:
-                    
+
                     break;
             }
             cycle += instructionCycles;

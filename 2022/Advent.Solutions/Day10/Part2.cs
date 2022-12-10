@@ -27,8 +27,8 @@ public class Part2
             Func<int, bool> instructionComplete = (c) => { return true; };
             while (m_instructionPointer < m_program.Length)
             {
-                if (instructionComplete(m_cycle)) {
-
+                if (instructionComplete(m_cycle))
+                {
                     instructionComplete = ProcessInstruction(m_cycle, m_program[m_instructionPointer++]);
                 }
                 m_crt.Render(m_cycle, m_x);
@@ -36,11 +36,12 @@ public class Part2
             }
         }
 
-        public Func<int,bool> ProcessInstruction(int clockCycle, string line) { 
+        public Func<int, bool> ProcessInstruction(int clockCycle, string line)
+        {
             var command = line.Split(' ');
             var instruction = command[0];
             int data = 0;
-            Func<int,bool> action = (c) => { return true; };
+            Func<int, bool> action = (c) => { return true; };
 
             if (instruction != "noop")
             {
@@ -50,12 +51,14 @@ public class Part2
             switch (instruction)
             {
                 case "addx":
-                    action = (int cycle) => {
+                    action = (int cycle) =>
+                    {
                         if (cycle == clockCycle + 2)
                         {
                             m_x += data;
                             return true;
-                        } else
+                        }
+                        else
                         {
                             return false;
                         }
@@ -74,7 +77,8 @@ public class Part2
     private class CRT
     {
         private readonly char[] m_display = new char[40 * 6];
-        public string[] Display {
+        public string[] Display
+        {
             get
             {
                 var rows = new string[6];
@@ -88,10 +92,11 @@ public class Part2
 
         public void Render(int cycle, int xRegister)
         {
-            if (Enumerable.Range(xRegister - 1, 3).Contains(cycle - 1 - ((cycle/40) * 40)))
+            if (Enumerable.Range(xRegister - 1, 3).Contains(cycle - 1 - ((cycle / 40) * 40)))
             {
                 m_display[cycle - 1] = '#';
-            } else
+            }
+            else
             {
                 m_display[cycle - 1] = '.';
             }
