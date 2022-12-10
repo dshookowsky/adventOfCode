@@ -92,7 +92,7 @@ public class Part2
 
         public void Render(int cycle, int xRegister)
         {
-            if (Enumerable.Range(xRegister - 1, 3).Contains(cycle - 1 - ((cycle / 40) * 40)))
+            if (Enumerable.Range(xRegister - 1, 3).Contains((cycle % 40) -1))
             {
                 m_display[cycle - 1] = '#';
             }
