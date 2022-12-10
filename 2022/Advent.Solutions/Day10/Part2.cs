@@ -76,13 +76,23 @@ public class Part2
 
     private class CRT
     {
-        private readonly char[] m_display = new char[40 * 6];
+        private readonly int m_columns;
+        private readonly int m_rows;
+
+        private readonly char[] m_display;
+
+        public CRT(int columns, int rows)
+        {
+            m_rows = rows;
+            m_columns = columns;
+            m_display = new char[columns * rows];
+        }
         public string[] Display
         {
             get
             {
-                var rows = new string[6];
-                for (int row = 0; row < 6; row++)
+                var rows = new string[m_rows];
+                for (int row = 0; row < m_rows; row++)
                 {
                     rows[row] = Row(row);
                 }
@@ -92,7 +102,7 @@ public class Part2
 
         public void Render(int cycle, int xRegister)
         {
-            if (Enumerable.Range(xRegister - 1, 3).Contains((cycle % 40) -1))
+            if (Enumerable.Range(xRegister - 1, 3).Contains((cycle % m_columns) -1))
             {
                 m_display[cycle - 1] = '#';
             }
@@ -105,9 +115,9 @@ public class Part2
         {
             StringBuilder row = new();
 
-            for (int column = 0; column < 40; column++)
+            for (int column = 0; column < m_columns; column++)
             {
-                row.Append(m_display[column + (rowIndex * 40)]);
+                row.Append(m_display[column + (rowIndex * m_columns)]);
             }
             return row.ToString();
         }
@@ -115,7 +125,7 @@ public class Part2
 
     public string[] Solution(IEnumerable<string> lines)
     {
-        var crt = new CRT();
+        var crt = new CRT(40, 6);
         var cpu = new CPU(crt);
 
         cpu.RunProgram(lines);
