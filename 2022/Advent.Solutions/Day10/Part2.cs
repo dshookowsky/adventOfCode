@@ -24,27 +24,23 @@ public class Part2
         {
             m_program = program.ToArray();
 
-            Action instructionComplete = () => { };
-            int nextFreeCycle = 0;
+            Func<int, bool> instructionComplete = (c) => { return true; };
             while (m_instructionPointer < m_program.Length)
             {
-                if (m_cycle >= nextFreeCycle) {
-                    instructionComplete();
+                if (instructionComplete(m_cycle)) {
 
-                    (int cycleCount, instructionComplete) = ProcessInstruction(m_program[m_instructionPointer++]);
-                    nextFreeCycle = m_cycle + cycleCount;
+                    instructionComplete = ProcessInstruction(m_cycle, m_program[m_instructionPointer++]);
                 }
                 m_crt.Render(m_cycle, m_x);
                 m_cycle++;
             }
         }
 
-        public (int instructionCycles, Action instructionComplete) ProcessInstruction(string line) { 
+        public Func<int,bool> ProcessInstruction(int clockCycle, string line) { 
             var command = line.Split(' ');
             var instruction = command[0];
-            int instructionCycles = 0;
             int data = 0;
-            Action action = () => { };
+            Func<int,bool> action = (c) => { return true; };
 
             if (instruction != "noop")
             {
@@ -54,18 +50,24 @@ public class Part2
             switch (instruction)
             {
                 case "addx":
-                    action = () => { m_x += data; };
-                    instructionCycles = 2;
+                    action = (int cycle) => {
+                        if (cycle == clockCycle + 2)
+                        {
+                            m_x += data;
+                            return true;
+                        } else
+                        {
+                            return false;
+                        }
+                    };
                     break;
                 case "noop":
-                    instructionCycles = 1;
                     break;
                 default:
-                    instructionCycles = 0;
                     break;
             }
 
-            return (instructionCycles, action);
+            return action;
         }
     }
 
