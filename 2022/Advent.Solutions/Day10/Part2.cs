@@ -7,9 +7,10 @@ public class Part2
 {
     private class CPU
     {
-        public CPU(CRT crt)
+        public CPU(CRT crt, string[] program)
         {
             m_crt = crt;
+            m_program = program;
         }
 
         public int X => m_x;
@@ -18,12 +19,11 @@ public class Part2
         private int m_x = 1;
         private int m_cycle = 1;
         private readonly CRT m_crt;
-        private string[] m_program;
+        private readonly string[] m_program;
         private int m_instructionPointer = 0;
-        public void RunProgram(IEnumerable<string> program)
-        {
-            m_program = program.ToArray();
 
+        public void RunProgram()
+        {
             Func<int, bool> instructionComplete = (c) => { return true; };
             while (m_instructionPointer < m_program.Length)
             {
@@ -41,6 +41,7 @@ public class Part2
             var command = line.Split(' ');
             var instruction = command[0];
             int data = 0;
+
             Func<int, bool> action = (c) => { return true; };
 
             if (instruction != "noop")
@@ -65,7 +66,6 @@ public class Part2
                     };
                     break;
                 case "noop":
-                    break;
                 default:
                     break;
             }
@@ -87,6 +87,7 @@ public class Part2
             m_columns = columns;
             m_display = new char[columns * rows];
         }
+
         public string[] Display
         {
             get
@@ -102,7 +103,7 @@ public class Part2
 
         public void Render(int cycle, int xRegister)
         {
-            if (Enumerable.Range(xRegister - 1, 3).Contains((cycle % m_columns) -1))
+            if (Enumerable.Range(xRegister - 1, 3).Contains((cycle % m_columns) - 1))
             {
                 m_display[cycle - 1] = '#';
             }
@@ -111,6 +112,7 @@ public class Part2
                 m_display[cycle - 1] = '.';
             }
         }
+
         public string Row(int rowIndex)
         {
             StringBuilder row = new();
@@ -126,9 +128,9 @@ public class Part2
     public string[] Solution(IEnumerable<string> lines)
     {
         var crt = new CRT(40, 6);
-        var cpu = new CPU(crt);
+        var cpu = new CPU(crt, lines.ToArray());
 
-        cpu.RunProgram(lines);
+        cpu.RunProgram();
 
         return crt.Display;
     }
