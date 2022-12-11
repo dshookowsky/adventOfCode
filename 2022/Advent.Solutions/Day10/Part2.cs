@@ -35,6 +35,12 @@ public class Part2
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="clockCycle"></param>
+        /// <param name="line"></param>
+        /// <returns>A function that executes an operation when the appropriate clock cycle has been reached.</returns>
         public Func<int, bool> ProcessInstruction(int clockCycle, string line)
         {
             var command = line.Split(' ');
@@ -43,16 +49,12 @@ public class Part2
 
             Func<int, bool> action = (c) => { return true; };
 
-            if (instruction != "noop")
-            {
-                data = int.Parse(command[1].Trim());
-            }
-
             switch (instruction)
             {
                 case "addx":
                     action = (int cycle) =>
                     {
+                        data = int.Parse(command[1].Trim());
                         if (cycle == clockCycle + 2)
                         {
                             m_x += data;
