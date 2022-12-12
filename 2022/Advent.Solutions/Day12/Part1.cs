@@ -15,21 +15,6 @@ public class Part1
             }.ToArray();
     }
 
-    public Point GetCharacterPosition(char target, string[] lines)
-    {
-        for (int row = 0; row < lines.Length; row++)
-        {
-            var position = lines[row].IndexOf(target);
-            if (position > -1)
-            {
-                return new Point(position, row);
-            }
-        }
-        throw new Exception("Character not found");
-    }
-
-
-
     private class Node
     {
         public Node? Parent;
