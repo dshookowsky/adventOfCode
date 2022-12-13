@@ -3,9 +3,9 @@
 public class Part2
 {
     /// <summary>
-    /// Get all of the distances so from last-to-first so that 
+    /// Get all of the distances from last-to-first so that 
     /// we don't have to re-run the search for each possible 
-    /// starting locations.
+    /// starting location.
     /// </summary>
     /// <param name="nodes"></param>
     /// <param name="startingNode">This is where the search starts, but is actually the E node</param>
