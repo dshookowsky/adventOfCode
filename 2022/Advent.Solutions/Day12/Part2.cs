@@ -1,34 +1,7 @@
-﻿using System.Drawing;
-
-namespace Advent.Solutions.Day12;
+﻿namespace Advent.Solutions.Day12;
 
 public class Part2
 {
-    public Point[] Neighbors(Point targetPoint)
-    {
-        return new List<Point>()
-            {
-                new Point(targetPoint.X + 1, targetPoint.Y),
-                new Point(targetPoint.X - 1, targetPoint.Y),
-                new Point(targetPoint.X, targetPoint.Y + 1),
-                new Point(targetPoint.X, targetPoint.Y - 1),
-            }.ToArray();
-    }
-
-    private class Node
-    {
-        public Node? Parent;
-        public int Elevation;
-        public int Distance = int.MaxValue;
-        public Point Coordinate;
-
-        public Node(Point coordinate, int elevation)
-        {
-            Coordinate = coordinate;
-            Elevation = elevation;
-        }
-    }
-
     /// <summary>
     /// Get all of the distances so from last-to-first so that 
     /// we don't have to re-run the search for each possible 
@@ -50,7 +23,7 @@ public class Part2
             Node u = Vertices.OrderBy(v => v.Distance).First();
             Vertices.Remove(u);
 
-            foreach (var neighbor in Neighbors(u.Coordinate))
+            foreach (var neighbor in u.Neighbors)
             {
                 var v = Vertices
                     .Where(v => v.Coordinate == neighbor).FirstOrDefault();
@@ -73,40 +46,14 @@ public class Part2
 
     public int Solution(string[] lines)
     {
-        List<Node> nodes = new();
+        var (nodes, startingNode, endingNode) = InputParser.ParseInput(
+            lines,
+            (c) => false,
+            (c) => c == 'E');
 
-        lines = lines.Reverse().ToArray();
-
-        Point endingLocation = new();
-        List<Point> startingLocations = new();
-        for (int row = 0; row < lines.Length; row++)
-        {
-            var line = lines[row];
-            for (int col = 0; col < line.Length; col++)
-            {
-                int elevation = 0;
-                Point point = new(col, row);
-                switch (line[col])
-                {
-                    case 'S':
-                        elevation = 'a' - 'a';
-                        break;
-                    case 'E':
-                        elevation = 'z' - 'a';
-                        endingLocation = point;
-                        break;
-                    default:
-                        elevation = line[col] - 'a';
-                        break;
-                }
-
-                var node = new Node(point, elevation);
-                nodes.Add(node);
-            }
-        }
+        if (endingNode == null) return 0;
 
         var startingNodes = nodes.Where(v => v.Elevation == 0).ToList();
-        var endingNode = nodes.Where(n => n.Coordinate == endingLocation).First();
 
         int distance = Dijkstra(nodes.ToArray(), endingNode);
 

@@ -1,81 +1,29 @@
-﻿using System.Drawing;
-
-namespace Advent.Solutions.Day12;
+﻿namespace Advent.Solutions.Day12;
 
 public class Part1
 {
-    public Point[] Neighbors(Point targetPoint)
-    {
-        return new List<Point>()
-            {
-                new Point(targetPoint.X + 1, targetPoint.Y),
-                new Point(targetPoint.X - 1, targetPoint.Y),
-                new Point(targetPoint.X, targetPoint.Y + 1),
-                new Point(targetPoint.X, targetPoint.Y - 1),
-            }.ToArray();
-    }
-
-    private class Node
-    {
-        public Node? Parent;
-        public int Elevation;
-        public int Distance = int.MaxValue;
-        public Point Coordinate;
-
-        public Node(Point coordinate, int elevation)
-        {
-            Coordinate = coordinate;
-            Elevation = elevation;
-        }
-    }
-    private readonly List<Node> Vertices = new();
-
     public int Solution(string[] lines)
     {
         lines = lines.Reverse().ToArray();
+        var (nodes, startingNode, endingNode) = InputParser.ParseInput(
+            lines,
+            (c) => c == 'S',
+            (c) => c == 'E');
+        
+        if (startingNode == null || endingNode == null) return 0;
 
-        Point startingLocation = new();
-        Point endingLocation = new();
-
-        for (int row = 0; row < lines.Length; row++)
-        {
-            var line = lines[row];
-            for (int col = 0; col < line.Length; col++)
-            {
-                int elevation = 0;
-                Point point = new(row, col);
-                switch (line[col])
-                {
-                    case 'S':
-                        elevation = 'a' - 'a' ;
-                        startingLocation = point;
-                        break;
-                    case 'E':
-                        elevation = 'z' - 'a';
-                        endingLocation = point;
-                        break;
-                    default:
-                        elevation = line[col] - 'a';
-                        break;
-                }
-
-                var node = new Node(point, elevation);
-                Vertices.Add(node);
-            }
-        }
-
-        var startingNode = Vertices.Where(v => v.Coordinate == startingLocation).First();
         startingNode.Distance = 0;
-        var endingNode = Vertices.Where(v => v.Coordinate == endingLocation).First();
 
-        while (Vertices.Any())
+        List<Node> vertices = new(nodes);
+
+        while (vertices.Any())
         {
-            Node u = Vertices.OrderBy(v => v.Distance).First();
-            Vertices.Remove(u);
+            Node u = vertices.OrderBy(v => v.Distance).First();
+            vertices.Remove(u);
 
-            foreach (var neighbor in Neighbors(u.Coordinate))
+            foreach (var neighbor in u.Neighbors)
             {
-                var v = Vertices
+                var v = vertices
                     .Where(v => v.Coordinate == neighbor).FirstOrDefault();
                 if (v == null) continue;
                 if (v.Elevation - u.Elevation > 1) continue;
