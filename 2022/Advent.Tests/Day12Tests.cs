@@ -40,6 +40,16 @@ public class Day12Tests
     }
 
     [TestMethod]
+    public void Part1BFSReturnsCorrectSolution()
+    {
+        var part1 = new Part1();
+        var lines = File.ReadAllLines(@"C:\Projects\AdventOfCode\2022\Advent.Solutions\Day12\input.txt");
+
+        var solution = part1.SolutionBFS(lines);
+        Assert.AreEqual(394, solution);
+    }
+
+    [TestMethod]
     public void Part1ReturnsCorrectSolution()
     {
         var part1 = new Part1();

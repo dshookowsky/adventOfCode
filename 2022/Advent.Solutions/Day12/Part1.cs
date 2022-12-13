@@ -45,7 +45,6 @@ public class Part1
         return steps;
     }
 
-
     public int Solution(string[] lines)
     {
         var (nodes, startingNode, endingNode) = InputParser.ParseInput(
