@@ -18,7 +18,7 @@ public class InputParser
             for (int col = 0; col < line.Length; col++)
             {
                 int elevation = 0;
-                Point point = new(row, col);
+                Point point = new(col, row);
                 switch (line[col])
                 {
                     case 'S':

@@ -23,6 +23,23 @@ public class Day12Tests
     }
 
     [TestMethod]
+    public void Part1BFSReturnsKnownSolution()
+    {
+        var part1 = new Part1();
+        var lines = new string[]
+        {
+            "Sabqponm",
+            "abcryxxl",
+            "accszExk",
+            "acctuvwj",
+            "abdefghi"
+        };
+
+        var solution = part1.SolutionBFS(lines);
+        Assert.AreEqual(31, solution);
+    }
+
+    [TestMethod]
     public void Part1ReturnsCorrectSolution()
     {
         var part1 = new Part1();
