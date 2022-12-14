@@ -1,19 +1,21 @@
-﻿using System.Drawing;
-
-namespace Advent.Solutions.Day12;
+﻿namespace Advent.Solutions.Day12;
+using System.Drawing;
 
 public class Node
 {
-    public Node? Parent;
-    public int Elevation;
-    public int Distance = int.MaxValue;
-    public Point Coordinate;
-
     public Node(Point coordinate, int elevation)
     {
         Coordinate = coordinate;
         Elevation = elevation;
     }
+
+    public Node? Parent { get; set; }
+
+    public int Elevation { get; set; }
+
+    public int Distance { get; set; } = int.MaxValue;
+
+    public Point Coordinate { get; set; }
 
     public Point[] Neighbors =>
         new List<Point>()

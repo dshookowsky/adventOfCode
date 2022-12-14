@@ -6,7 +6,7 @@ public class Part1
     {
         int x = 1;
         int cycle = 1;
-        Dictionary<int, int> signalStrength = new();
+        Dictionary<int, int> signalStrength = new ();
         int nextCycle = 20;
         foreach (var line in lines)
         {
@@ -20,6 +20,7 @@ public class Part1
             {
                 data = int.Parse(command[1].Trim());
             }
+
             switch (instruction)
             {
                 case "addx":
@@ -33,6 +34,7 @@ public class Part1
 
                     break;
             }
+
             cycle += instructionCycles;
             if (cycle == nextCycle)
             {

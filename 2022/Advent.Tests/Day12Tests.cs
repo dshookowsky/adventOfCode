@@ -1,6 +1,5 @@
-﻿using Advent.Solutions.Day12;
-
-namespace Advent.Tests;
+﻿namespace Advent.Tests;
+using Advent.Solutions.Day12;
 
 [TestClass]
 public class Day12Tests
@@ -15,7 +14,7 @@ public class Day12Tests
             "abcryxxl",
             "accszExk",
             "acctuvwj",
-            "abdefghi"
+            "abdefghi",
         };
 
         var solution = part1.Solution(lines);
@@ -32,7 +31,7 @@ public class Day12Tests
             "abcryxxl",
             "accszExk",
             "acctuvwj",
-            "abdefghi"
+            "abdefghi",
         };
 
         var solution = part1.SolutionBFS(lines);
@@ -63,15 +62,34 @@ public class Day12Tests
     public void Part2ReturnsKnownSolution()
     {
         var part2 = new Part2();
-        var lines = new string[] {
+        var lines = new string[]
+        {
             "Sabqponm",
             "abcryxxl",
             "accszExk",
             "acctuvwj",
-            "abdefghi"
+            "abdefghi",
         };
 
         var solution = part2.Solution(lines);
+        Assert.AreEqual(29, solution);
+    }
+
+    [TestMethod]
+    [Ignore("Not working")]
+    public void Part2BFSReturnsKnownSolution()
+    {
+        var part2 = new Part2();
+        var lines = new string[]
+        {
+            "Sabqponm",
+            "abcryxxl",
+            "accszExk",
+            "acctuvwj",
+            "abdefghi",
+        };
+
+        var solution = part2.SolutionBFS(lines);
         Assert.AreEqual(29, solution);
     }
 

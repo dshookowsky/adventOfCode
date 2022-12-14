@@ -1,6 +1,5 @@
-﻿using System.Text;
-
-namespace Advent.Solutions.Day05;
+﻿namespace Advent.Solutions.Day05;
+using System.Text;
 
 public class Part1
 {
@@ -9,7 +8,7 @@ public class Part1
         var (crateStacks, instructions) = InputParser.ParseInput(lines);
 
         // Turn the collection of IEnumerables into a collection of stacks.
-        List<Stack<char>> stacks = new();
+        List<Stack<char>> stacks = new ();
         foreach (IEnumerable<char> crateStack in crateStacks)
         {
             stacks.Add(new Stack<char>(crateStack));
@@ -32,11 +31,12 @@ public class Part1
             }
         }
 
-        StringBuilder sb = new();
+        StringBuilder sb = new ();
         foreach (var stack in stacks)
         {
             sb.Append(stack.Pop());
         }
+
         return sb.ToString();
     }
 }

@@ -17,8 +17,12 @@ public class Part2
 
             var intersection = a.Intersect(b).ToArray();
             var count = intersection.Length;
-            if (count > 0) dupes++;
+            if (count > 0)
+            {
+                dupes++;
+            }
         }
+
         return dupes;
     }
 }

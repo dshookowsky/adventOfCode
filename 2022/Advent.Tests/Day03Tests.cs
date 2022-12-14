@@ -1,6 +1,5 @@
-﻿using Advent.Solutions.Day03;
-
-namespace Advent.Tests;
+﻿namespace Advent.Tests;
+using Advent.Solutions.Day03;
 
 [TestClass]
 public class Day03Tests
@@ -17,7 +16,7 @@ public class Day03Tests
         "PmmdzqPrVvPwwTWBwg",
         "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
         "ttgJtRGJQctTZtZT",
-        "CrZsJsPPZsGzwwsLwLmpwMDw"
+        "CrZsJsPPZsGzwwsLwLmpwMDw",
     };
 
         var solution = part1.SolutionValue(lines.ToArray());
@@ -39,14 +38,14 @@ public class Day03Tests
         var part2 = new Part2();
 
         var lines = new List<string>
-    {
-        "vJrwpWtwJgWrhcsFMMfFFhFp",
-        "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
-        "PmmdzqPrVvPwwTWBwg",
-        "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
-        "ttgJtRGJQctTZtZT",
-        "CrZsJsPPZsGzwwsLwLmpwMDw"
-    };
+        {
+            "vJrwpWtwJgWrhcsFMMfFFhFp",
+            "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+            "PmmdzqPrVvPwwTWBwg",
+            "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+            "ttgJtRGJQctTZtZT",
+            "CrZsJsPPZsGzwwsLwLmpwMDw",
+        };
 
         var solution = part2.SolutionValue(lines.ToArray());
         Assert.AreEqual(70, solution);

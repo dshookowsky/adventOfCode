@@ -11,7 +11,10 @@ public class Part1
             (c) => c == 'S',
             (c) => c == 'E');
 
-        if (startingNode == null || endingNode == null) return 0;
+        if (startingNode == null || endingNode == null)
+        {
+            return 0;
+        }
 
         startingNode.Distance = 0;
 
@@ -22,14 +25,28 @@ public class Part1
         while (queue.Any())
         {
             var v = queue.Dequeue();
-            if (v == endingNode) break;
+            if (v == endingNode)
+            {
+                break;
+            }
 
             foreach (var coordinate in v.Neighbors)
             {
                 var neighbor = nodes.Where(n => n.Coordinate == coordinate).FirstOrDefault();
-                if (neighbor == null) continue;
-                if (explored.Contains(neighbor)) continue;
-                if (neighbor.Elevation - v.Elevation > 1) continue;
+                if (neighbor == null)
+                {
+                    continue;
+                }
+
+                if (explored.Contains(neighbor))
+                {
+                    continue;
+                }
+
+                if (neighbor.Elevation - v.Elevation > 1)
+                {
+                    continue;
+                }
 
                 explored.Add(neighbor);
                 neighbor.Parent = v;
@@ -40,7 +57,11 @@ public class Part1
 
         var steps = 0;
         var parent = endingNode.Parent;
-        while (parent != null) { steps++; parent = parent.Parent; }
+        while (parent != null)
+        {
+            steps++;
+            parent = parent.Parent;
+        }
 
         return steps;
     }
@@ -51,12 +72,15 @@ public class Part1
             lines,
             (c) => c == 'S',
             (c) => c == 'E');
-        
-        if (startingNode == null || endingNode == null) return 0;
+
+        if (startingNode == null || endingNode == null)
+        {
+            return 0;
+        }
 
         startingNode.Distance = 0;
 
-        List<Node> vertices = new(nodes);
+        List<Node> vertices = new (nodes);
 
         while (vertices.Any())
         {
@@ -67,8 +91,15 @@ public class Part1
             {
                 var v = vertices
                     .Where(v => v.Coordinate == neighbor).FirstOrDefault();
-                if (v == null) continue;
-                if (v.Elevation - u.Elevation > 1) continue;
+                if (v == null)
+                {
+                    continue;
+                }
+
+                if (v.Elevation - u.Elevation > 1)
+                {
+                    continue;
+                }
 
                 int distance = u.Distance + 1;
                 if (distance < v.Distance)

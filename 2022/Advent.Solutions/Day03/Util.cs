@@ -2,7 +2,6 @@
 {
     internal static class Util
     {
-
         /// <summary>
         /// Break a list of items into chunks of a specific size
         /// </summary>

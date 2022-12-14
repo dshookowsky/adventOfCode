@@ -13,8 +13,8 @@ public class Part1
             var minMaxA = pairs[0].Split('-');
             var minMaxB = pairs[1].Split('-');
 
-            if (Convert.ToInt16(minMaxA[0]) <= Convert.ToInt16(minMaxB[0]) && Convert.ToInt16(minMaxA[1]) >= Convert.ToInt16(minMaxB[1]) ||
-                Convert.ToInt16(minMaxB[0]) <= Convert.ToInt16(minMaxA[0]) && Convert.ToInt16(minMaxB[1]) >= Convert.ToInt16(minMaxA[1]))
+            if (((Convert.ToInt16(minMaxA[0]) <= Convert.ToInt16(minMaxB[0])) && (Convert.ToInt16(minMaxA[1]) >= Convert.ToInt16(minMaxB[1]))) ||
+                ((Convert.ToInt16(minMaxB[0]) <= Convert.ToInt16(minMaxA[0])) && (Convert.ToInt16(minMaxB[1]) >= Convert.ToInt16(minMaxA[1]))))
             {
                 Console.WriteLine("GOOD: " + line);
                 dupes++;
@@ -23,8 +23,8 @@ public class Part1
             {
                 Console.WriteLine("BAD: " + line);
             }
-
         }
+
         return dupes;
     }
 }

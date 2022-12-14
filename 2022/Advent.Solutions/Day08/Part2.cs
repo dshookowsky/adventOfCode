@@ -2,7 +2,7 @@
 
 public class Part2
 {
-    private readonly List<int[]> m_forest = new();
+    private readonly List<int[]> m_forest = new ();
 
     public int ScenicScore(int row, int column, int xDirection, int yDirection, int height)
     {

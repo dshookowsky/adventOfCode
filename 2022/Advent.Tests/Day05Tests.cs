@@ -1,7 +1,9 @@
 ﻿namespace Advent.Tests;
 
 using Advent.Solutions.Day05;
+using System.Diagnostics.CodeAnalysis;
 
+[SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1122:UseStringEmptyForEmptyStrings", Justification = "Reviewed.")]
 [TestClass]
 public class Day05Tests
 {
@@ -20,7 +22,7 @@ public class Day05Tests
         "move 1 from 2 to 1",
         "move 3 from 1 to 3",
         "move 2 from 2 to 1",
-        "move 1 from 1 to 2"
+        "move 1 from 1 to 2",
     };
 
         var solution = part1.Solution(lines);
@@ -53,7 +55,7 @@ public class Day05Tests
         "move 1 from 2 to 1",
         "move 3 from 1 to 3",
         "move 2 from 2 to 1",
-        "move 1 from 1 to 2"
+        "move 1 from 1 to 2",
     };
 
         var solution = part2.Solution(lines);

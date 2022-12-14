@@ -1,5 +1,5 @@
-﻿using Advent.Solutions.Day07;
-namespace Advent.Tests;
+﻿namespace Advent.Tests;
+using Advent.Solutions.Day07;
 
 [TestClass]
 public class Day07Tests
@@ -10,7 +10,6 @@ public class Day07Tests
         var lines = File.ReadAllLines(@"C:\Projects\AdventOfCode\2022\Advent.Solutions\Day07\input.txt");
 
         var part1 = new Part1();
-
 
         var solution = part1.Solution(lines);
 

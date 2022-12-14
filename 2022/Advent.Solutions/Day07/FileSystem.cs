@@ -1,19 +1,17 @@
-﻿using System.Text.RegularExpressions;
-
-namespace Advent.Solutions.Day07;
+﻿namespace Advent.Solutions.Day07;
+using System.Text.RegularExpressions;
 
 public class FileSystem
 {
-    public DirectoryInformation Root => m_root;
     private readonly DirectoryInformation m_root;
 
     public FileSystem(IEnumerable<string> lines)
     {
-        m_root = new("/");
+        m_root = new ("/");
 
         DirectoryInformation currentDirectory = Root;
 
-        Regex filePattern = new(@"^(\d+) (\S+)$");
+        Regex filePattern = new (@"^(\d+) (\S+)$");
         foreach (var line in lines)
         {
             // Because the input contains the result, we can ignore "$ ls"
@@ -46,6 +44,8 @@ public class FileSystem
             }
         }
     }
+
+    public DirectoryInformation Root => m_root;
 
     public IEnumerable<DirectoryInformation> Children
     {

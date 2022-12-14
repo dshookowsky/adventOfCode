@@ -1,9 +1,8 @@
-﻿using Advent.Solutions.Day11;
-using System.Security.Cryptography;
-using System;
+﻿namespace Advent.Tests;
+using Advent.Solutions.Day11;
+using System.Diagnostics.CodeAnalysis;
 
-namespace Advent.Tests;
-
+[SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1122:UseStringEmptyForEmptyStrings", Justification = "Reviewed.")]
 [TestClass]
 public class Day11Tests
 {
@@ -56,14 +55,13 @@ public class Day11Tests
         Assert.AreEqual(55944, solution);
     }
 
-
     [TestMethod]
     public void Part2ReturnsCorrectSolution()
     {
         var lines = File.ReadAllLines(@"C:\Projects\AdventOfCode\2022\Advent.Solutions\Day11\input.txt");
 
         var part2 = new Part2();
-        var solution = part2.Solution(lines);
+        var solution = Part2.Solution(lines);
         Assert.AreEqual(15117269860, solution);
     }
 
@@ -102,7 +100,7 @@ public class Day11Tests
         };
 
         var part2 = new Part2();
-        var solution = part2.Solution(lines);
+        var solution = Part2.Solution(lines);
         Assert.AreEqual(2713310158L, solution);
     }
 }

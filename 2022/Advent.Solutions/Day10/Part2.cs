@@ -1,11 +1,27 @@
-﻿using System.Text;
+﻿namespace Advent.Solutions.Day10;
 
-namespace Advent.Solutions.Day10;
+using System.Text;
 
 public class Part2
 {
+    public static string[] Solution(IEnumerable<string> lines)
+    {
+        var crt = new CRT(40, 6);
+        var cpu = new CPU(crt, lines.ToArray());
+
+        cpu.RunProgram();
+
+        return crt.Display;
+    }
+
     private class CPU
     {
+        private readonly CRT m_crt;
+        private readonly string[] m_program;
+        private int m_instructionPointer = 0;
+        private int m_cycle = 1;
+        private int m_x = 1;
+
         public CPU(CRT crt, string[] program)
         {
             m_crt = crt;
@@ -13,13 +29,8 @@ public class Part2
         }
 
         public int X => m_x;
-        public int Cycle => m_cycle;
 
-        private int m_x = 1;
-        private int m_cycle = 1;
-        private readonly CRT m_crt;
-        private readonly string[] m_program;
-        private int m_instructionPointer = 0;
+        public int Cycle => m_cycle;
 
         public void RunProgram()
         {
@@ -30,13 +41,14 @@ public class Part2
                 {
                     instructionComplete = ProcessInstruction(m_cycle, m_program[m_instructionPointer++]);
                 }
+
                 m_crt.Render(m_cycle, m_x);
                 m_cycle++;
             }
         }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="clockCycle"></param>
         /// <param name="line"></param>
@@ -98,6 +110,7 @@ public class Part2
                 {
                     rows[row] = Row(row);
                 }
+
                 return rows;
             }
         }
@@ -116,23 +129,14 @@ public class Part2
 
         public string Row(int rowIndex)
         {
-            StringBuilder row = new();
+            StringBuilder row = new ();
 
             for (int column = 0; column < m_columns; column++)
             {
                 row.Append(m_display[column + (rowIndex * m_columns)]);
             }
+
             return row.ToString();
         }
-    }
-
-    public string[] Solution(IEnumerable<string> lines)
-    {
-        var crt = new CRT(40, 6);
-        var cpu = new CPU(crt, lines.ToArray());
-
-        cpu.RunProgram();
-
-        return crt.Display;
     }
 }

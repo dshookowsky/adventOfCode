@@ -1,6 +1,7 @@
-﻿using Advent.Solutions.Day08;
+﻿namespace Advent.Tests;
 
-namespace Advent.Tests;
+using Advent.Solutions.Day08;
+using System.Diagnostics.CodeAnalysis;
 
 [TestClass]
 public class Day08Tests
@@ -14,7 +15,7 @@ public class Day08Tests
         "25512",
         "65332",
         "33549",
-        "35390"
+        "35390",
         };
 
         var solution = new Part1().Solution(lines);
@@ -31,7 +32,7 @@ public class Day08Tests
         "25512",
         "65332",
         "33549",
-        "35390"
+        "35390",
         };
 
         var solution = new Part2().Solution(lines);

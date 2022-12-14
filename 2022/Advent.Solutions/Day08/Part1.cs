@@ -2,7 +2,7 @@
 
 public class Part1
 {
-    private readonly List<int[]> m_forest = new();
+    private readonly List<int[]> m_forest = new ();
 
     public bool IsVisible(int row, int column, int xDirection, int yDirection, int height)
     {

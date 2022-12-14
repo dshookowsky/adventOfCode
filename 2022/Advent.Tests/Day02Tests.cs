@@ -1,7 +1,7 @@
 ﻿namespace Advent.Tests
 {
-    using Advent.Solutions.Day02;
     using System.IO;
+    using Advent.Solutions.Day02;
 
     [TestClass]
     public class Day02Tests
@@ -15,7 +15,7 @@
         {
             "A Y",
             "B X",
-            "C Z"
+            "C Z",
         };
 
             var solution = part1.Solution(lines);
@@ -42,7 +42,7 @@
         {
             "A Y",
             "B X",
-            "C Z"
+            "C Z",
         };
 
             var solution = part2.Solution(lines);
@@ -58,6 +58,5 @@
 
             Assert.AreEqual(13193, solution);
         }
-
     }
 }

@@ -14,8 +14,8 @@
                 {
                     total += Priority.Score(c);
                 }
-
             }
+
             return total;
         }
     }

@@ -1,6 +1,5 @@
-﻿using System.Text;
-
-namespace Advent.Solutions.Day05;
+﻿namespace Advent.Solutions.Day05;
+using System.Text;
 
 public class Part2
 {
@@ -8,7 +7,7 @@ public class Part2
     {
         var (crates, instructions) = InputParser.ParseInput(lines);
 
-        List<List<char>> stacks = new();
+        List<List<char>> stacks = new ();
         foreach (var crate in crates)
         {
             stacks.Add(new List<char>(crate));
@@ -33,12 +32,12 @@ public class Part2
             stacks[to].AddRange(moving);
         }
 
-        StringBuilder sb = new();
+        StringBuilder sb = new ();
         foreach (var stack in stacks)
         {
             sb.Append(stack.Last());
         }
+
         return sb.ToString();
     }
-
 }

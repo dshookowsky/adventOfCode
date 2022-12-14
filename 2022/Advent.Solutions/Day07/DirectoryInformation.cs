@@ -2,13 +2,27 @@
 
 public class DirectoryInformation
 {
+    private readonly List<FileInformation> m_files = new ();
     private readonly string m_name;
-    public string Name => m_name;
-    public List<FileInformation> Files = new();
-
-    private Dictionary<string, DirectoryInformation> m_children = new();
-
     private readonly DirectoryInformation? m_parent;
+    private readonly Dictionary<string, DirectoryInformation> m_children = new ();
+
+    public DirectoryInformation(DirectoryInformation parent, string name)
+    {
+        m_parent = parent;
+
+        m_name = name;
+    }
+
+    public DirectoryInformation(string name)
+    {
+        m_name = name;
+    }
+
+    public List<FileInformation> Files => m_files;
+
+    public string Name => m_name;
+
     public DirectoryInformation? Parent => m_parent;
 
     public string Path
@@ -26,26 +40,6 @@ public class DirectoryInformation
         }
     }
 
-    public DirectoryInformation(string name)
-    {
-        m_name = name;
-    }
-
-    public DirectoryInformation(DirectoryInformation parent, string name)
-    {
-        m_parent = parent;
-
-        m_name = name;
-    }
-
-    public DirectoryInformation ParseCd(string line)
-    {
-        string directoryName = line.Split(' ')[2];
-        if (directoryName == Path) return this;
-
-        return m_children[directoryName];
-    }
-
     public IEnumerable<DirectoryInformation> Children
     {
         get
@@ -60,22 +54,35 @@ public class DirectoryInformation
             }
         }
     }
-    public DirectoryInformation CreateSubDirectory(string directoryName)
-    {
-        m_children[directoryName] = new DirectoryInformation(this, directoryName);
-        return m_children[directoryName];
-    }
 
     public int Size
     {
         get
         {
-            var size = Files.Sum(f => f.Size);
+            var size = m_files.Sum(f => f.Size);
             foreach (var child in m_children.Values)
             {
                 size += child.Size;
             }
+
             return size;
         }
+    }
+
+    public DirectoryInformation ParseCd(string line)
+    {
+        string directoryName = line.Split(' ')[2];
+        if (directoryName == Path)
+        {
+            return this;
+        }
+
+        return m_children[directoryName];
+    }
+
+    public DirectoryInformation CreateSubDirectory(string directoryName)
+    {
+        m_children[directoryName] = new DirectoryInformation(this, directoryName);
+        return m_children[directoryName];
     }
 }

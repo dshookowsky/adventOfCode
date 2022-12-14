@@ -17,9 +17,7 @@
                 total += Priority.Score(i.First());
             }
 
-
             return total;
         }
-
     }
 }

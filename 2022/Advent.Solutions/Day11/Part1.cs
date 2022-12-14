@@ -6,8 +6,8 @@ public partial class Part1
     {
         const int totalRounds = 20;
 
-        List<Monkey> monkeys = new();
-        for (int lineNumber = 0; lineNumber < lines.Count(); lineNumber+=7 )
+        List<Monkey> monkeys = new ();
+        for (int lineNumber = 0; lineNumber < lines.Count(); lineNumber += 7)
         {
             var monkeyShines = lines.Skip(lineNumber).Take(7).ToList();
             monkeys.Add(new Monkey(
@@ -20,7 +20,7 @@ public partial class Part1
 
         for (int round = 0; round < totalRounds; round++)
         {
-            foreach(Monkey monkey in monkeys)
+            foreach (Monkey monkey in monkeys)
             {
                 while (monkey.WorryLevels.Count > 0)
                 {

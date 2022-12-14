@@ -1,6 +1,5 @@
-﻿using Advent.Solutions.Day06;
-
-namespace Advent.Tests;
+﻿namespace Advent.Tests;
+using Advent.Solutions.Day06;
 
 [TestClass]
 public class Day06Tests
@@ -19,7 +18,6 @@ public class Day06Tests
     public void Part2ReturnsKnownSolution()
     {
         var lines = "nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg";
-
 
         var part2 = new Part2();
         var solution = part2.Solution(lines);

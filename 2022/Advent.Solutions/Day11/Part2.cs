@@ -1,10 +1,7 @@
-﻿using System.Diagnostics;
-
-namespace Advent.Solutions.Day11;
-
+﻿namespace Advent.Solutions.Day11;
 public class Part2
 {
-    public long Solution(IEnumerable<string> lines)
+    public static long Solution(IEnumerable<string> lines)
     {
         const int totalRounds = 10000;
         const int itemsRow = 1;
@@ -13,7 +10,7 @@ public class Part2
         const int trueRow = 4;
         const int falseRow = 5;
 
-        List<Monkey> monkeys = new();
+        List<Monkey> monkeys = new ();
         for (int lineNumber = 0; lineNumber < lines.Count(); lineNumber += 7)
         {
             var monkeyShines = lines.Skip(lineNumber).Take(7).ToList();
@@ -41,7 +38,6 @@ public class Part2
                     int worryLevel = monkey.RemoveItem();
                     long inspectionResult = monkey.Inspect(worryLevel) % lcm;
 
-                    Debug.Assert(inspectionResult > 0 && inspectionResult < int.MaxValue);
                     worryLevel = (int)inspectionResult;
                     int nextMonkey = monkey.NextMonkey(worryLevel);
 
@@ -63,21 +59,12 @@ public class Part2
 
     private class Monkey
     {
-        public int Divisor = 1;
-
-        public long InspectionCount = 0;
-        public List<int> WorryLevels;
-
-        public Func<int, bool> Test;
-
-        private readonly Func<int, long> Operation;
-
-        public Func<int, int> NextMonkey;
+        private readonly Func<int, long> m_operation;
 
         public Monkey(List<int> items, string operationDescription, string testDescription, string trueResultDescription, string falseResultDescription)
         {
             WorryLevels = items;
-            Operation = ParseOperationDescription(operationDescription);
+            m_operation = ParseOperationDescription(operationDescription);
             Test = ParseTestDescription(testDescription);
 
             var trueResult = int.Parse(trueResultDescription.Split(' ').Last());
@@ -86,10 +73,30 @@ public class Part2
             NextMonkey = (worryLevel) => Test(worryLevel) ? trueResult : falseResult;
         }
 
+        public int Divisor { get; private set; } = 1;
+
+        public long InspectionCount { get; private set; } = 0;
+
+        public List<int> WorryLevels { get; set; }
+
+        public Func<int, bool> Test { get; }
+
+        public Func<int, int> NextMonkey { get; }
+
+        public static long Multiply(long operand1, long operand2)
+        {
+            return operand1 * operand2;
+        }
+
+        public static long Add(int operand1, int operand2)
+        {
+            return operand1 + operand2;
+        }
+
         public long Inspect(int worryLevel)
         {
             InspectionCount++;
-            return Operation(worryLevel);
+            return m_operation(worryLevel);
         }
 
         public void AddItem(int worryLevel)
@@ -113,20 +120,13 @@ public class Part2
             return item;
         }
 
-        private Func<int, bool> ParseTestDescription(string testDescription)
-        {
-            Divisor = int.Parse(testDescription.Split(' ').Last());
-            return (x) => x % Divisor == 0;
-        }
-
-        private Func<int, long> ParseOperationDescription(string operationDescription)
+        private static Func<int, long> ParseOperationDescription(string operationDescription)
         {
             // "Operation: new = old + 6"
             // "Operation: new = -->old + 6<--"
             var operation = operationDescription.Split('=')[1].Trim().Split(' ');
 
             int? operand2 = null;
-
 
             if (int.TryParse(operation[2], out int value))
             {
@@ -141,14 +141,10 @@ public class Part2
             };
         }
 
-        public long Multiply(int operand1, int operand2)
+        private Func<int, bool> ParseTestDescription(string testDescription)
         {
-            return (long)operand1 * (long)operand2;
-        }
-
-        public long Add(int operand1, int operand2)
-        {
-            return operand1 + operand2;
+            Divisor = int.Parse(testDescription.Split(' ').Last());
+            return (x) => x % Divisor == 0;
         }
     }
 }
