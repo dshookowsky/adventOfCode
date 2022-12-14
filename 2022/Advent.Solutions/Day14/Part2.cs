@@ -51,7 +51,7 @@ public class Part2
         return totalSand;
     }
 
-    private IEnumerable<Point> GetCandidates(Point p)
+    private static IEnumerable<Point> GetCandidates(Point p)
     {
         var candidates = new List<Point>()
         {
