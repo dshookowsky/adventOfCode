@@ -1,6 +1,5 @@
 ﻿namespace Advent.Tests;
 using Advent.Solutions.Day13;
-using System.Diagnostics.CodeAnalysis;
 
 [TestClass]
 public class Day13Tests
@@ -35,8 +34,7 @@ public class Day13Tests
             "[1,[2,[3,[4,[5,6,0]]]],8,9]",
         };
 
-        var part1 = new Part1();
-        var solution = part1.Solution(lines);
+        var solution = Part1.Solution(lines);
         Assert.AreEqual(13, solution);
     }
 
@@ -44,9 +42,8 @@ public class Day13Tests
     public void Part1ReturnsCorrectSolution()
     {
         var lines = File.ReadAllLines(@"C:\Projects\AdventOfCode\2022\Advent.Solutions\Day13\input.txt");
-        var part1 = new Part1();
 
-        var solution = part1.Solution(lines);
+        var solution = Part1.Solution(lines);
         Assert.AreEqual(5503, solution); // 5504, 5742 too high
     }
 

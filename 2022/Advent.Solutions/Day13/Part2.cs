@@ -1,6 +1,5 @@
-﻿using System.Diagnostics;
-
-namespace Advent.Solutions.Day13;
+﻿namespace Advent.Solutions.Day13;
+using System.Diagnostics;
 
 public class Part2
 {
@@ -20,10 +19,7 @@ public class Part2
             packets.Add(new Packet(left));
             packets.Add(new Packet(right));
 
-            if (lineIndex < lines.Length)
-            {
-                lineIndex++; // consume blank line
-            }
+            lineIndex++; // consume blank line
         }
 
         var twoPacket = new Packet("[[2]]");
