@@ -41,6 +41,8 @@ csharp_style_allow_blank_lines_between_consecutive_braces_experimental = true:si
 csharp_style_allow_blank_line_after_colon_in_constructor_initializer_experimental = true:silent
 csharp_style_conditional_delegate_call = true:suggestion
 dotnet_diagnostic.SA1600.severity = silent
+dotnet_diagnostic.SA1602.severity = silent
+dotnet_diagnostic.SA0001.severity = silent
 
 [*.{cs,vb}]
 #### Naming styles ####

@@ -1,40 +1,28 @@
 ﻿namespace Advent.Solutions.Day13;
-using System.Diagnostics;
 using System.Text.Json;
 
-public class Part1
+public class Packet : IComparable<Packet>
 {
-    public int Solution(string[] lines)
+    private readonly JsonElement m_jsonElement;
+
+    public Packet(string packetData)
     {
-        int lineIndex = 0;
-        int total = 0;
-        int pairIndex = 0;
+        m_jsonElement = JsonDocument.Parse(packetData).RootElement;
+    }
 
-        while (lineIndex + 2 <= lines.Length)
+    public int CompareTo(Packet? other)
+    {
+        if (other == null)
         {
-            pairIndex++;
-            Debug.WriteLine($"Pair {pairIndex}");
-
-            string left = lines[lineIndex++];
-            string right = lines[lineIndex++];
-            Debug.WriteLine(left);
-            Debug.WriteLine(right);
-
-            var packet1 = JsonDocument.Parse(left);
-            var packet2 = JsonDocument.Parse(right);
-
-            var result = AreOrdered(packet1.RootElement, packet2.RootElement);
-            Debug.WriteLine(result);
-
-            if (result < 0)
-            {
-                total += pairIndex;
-            }
-
-            lineIndex++;
+            return -1;
         }
 
-        return total;
+        return AreOrdered(m_jsonElement, other.m_jsonElement);
+    }
+
+    public override string ToString()
+    {
+        return m_jsonElement.ToString();
     }
 
     private int AreOrdered(JsonElement left, JsonElement right)

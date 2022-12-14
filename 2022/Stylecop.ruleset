@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="SendPro SasS Style Ruleset" Description="Code analysis rules for StyleCop.Analyzers." ToolsVersion="14.0">
-  <!-- <Include Path="StyleCop.Analyzers.ruleset" Action="Default" /> -->
-  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-   
-    <!-- Allow prefixing variables with m_ -->
-    <Rule Id="SA1308" Action="None"/>
-  </Rules>
-</RuleSet>
